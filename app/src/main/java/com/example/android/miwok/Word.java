@@ -17,7 +17,7 @@ package com.example.android.miwok;
 
 /**
  * {@link Word} represents a vocabulary word that the user wants to learn.
- * It contains a default translation and a Miwok translation for that word.
+ * It contains a default translation, a Miwok translation, and an image for that word.
  */
 public class Word {
 
@@ -27,8 +27,24 @@ public class Word {
     /** Miwok translation for the word */
     private String mMiwokTranslation;
 
-    /**  image for the word */
-    private String mMiwokImage;
+    /**  image resource ID for the word */
+    private int mImageResourceId = NO_IMAGE_PROVIDED;
+
+    private static final int NO_IMAGE_PROVIDED = -1;
+    /**
+     * Create a new Word object.
+     *
+     * @param defaultTranslation is the word in a language that the user is already familiar with
+     *                           (such as English)
+     * @param miwokTranslation is the word in the Miwok language
+     *
+     *
+     */
+    public Word(String defaultTranslation, String miwokTranslation) {
+        mDefaultTranslation = defaultTranslation;
+        mMiwokTranslation = miwokTranslation;
+
+    }
 
     /**
      * Create a new Word object.
@@ -37,13 +53,14 @@ public class Word {
      *                           (such as English)
      * @param miwokTranslation is the word in the Miwok language
      *
-     *  @param miwokImage is the image for that word
+     *  @param imageResourceId is the image for that word
      */
-    public Word(String defaultTranslation, String miwokTranslation, String miwokImage) {
+    public Word(String defaultTranslation, String miwokTranslation, int imageResourceId) {
         mDefaultTranslation = defaultTranslation;
         mMiwokTranslation = miwokTranslation;
-        mMiwokImage = miwokImage;
+        mImageResourceId = imageResourceId;
     }
+
 
     /**
      * Get the default translation of the word.
@@ -62,8 +79,16 @@ public class Word {
     /**
      * Get the image of the word.
      */
-    public String getMiwokImage() {
-        return mMiwokImage;
+    public int getImageResourceId() {
+        return mImageResourceId;
     }
+
+    /**
+     * Returns whether or not there is an image for this word.
+     */
+    public boolean hasImage() {
+        return mImageResourceId != NO_IMAGE_PROVIDED;
+    }
+
 
 }
